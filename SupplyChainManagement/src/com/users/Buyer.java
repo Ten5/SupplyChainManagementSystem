@@ -6,7 +6,7 @@ public class Buyer extends User implements MakeDecision {
 	public Buyer(String name, String password, String email) {
 		super(name, password, email);
 	}
-	
+
 	@Override
 	public void login() {
 		// TODO Auto-generated method stub

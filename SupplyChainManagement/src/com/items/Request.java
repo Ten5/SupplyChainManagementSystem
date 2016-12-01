@@ -34,8 +34,12 @@ public class Request {
 		return this.id;
 	}
 	
-	public int getRequstedStatus() {
+	public int getRequestedStatus() {
 		return this.status;
+	}
+	
+	public void setRequestedStatus(int status){
+		this.status = status;
 	}
 	
 	public void setRequesterName(String name) {

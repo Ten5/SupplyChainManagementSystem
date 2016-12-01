@@ -1,5 +1,6 @@
 package com.users;
 import com.interfaces.MakeDecision;
+import com.items.Request;
 
 public class FinancialApprover extends User implements MakeDecision {
 
@@ -13,15 +14,13 @@ public class FinancialApprover extends User implements MakeDecision {
 		
 	}
 
-	@Override
-	public void approveRequest() {
-		// TODO Auto-generated method stub
-		
+	public void approveRequest(Request request) {
+		request.setRequestedStatus(2);
 	}
 
 	@Override
-	public void rejectRequest() {
+	public void rejectRequest(Request request) {
 		// TODO Auto-generated method stub
-		
+		request.setRequestedStatus(-1);
 	}
 }

@@ -16,8 +16,6 @@ public class Request {
 		this.productList = productList;
 		
 		totalQuantity = 0;
-		for(int i = 0; i < productList.length; i++)
-			totalQuantity += productList[i].getStock();
 		
 		totalPrice = 0.0;
 		for(int i = 0; i < productList.length; i++)

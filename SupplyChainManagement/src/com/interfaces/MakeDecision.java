@@ -1,8 +1,9 @@
 package com.interfaces;
 
+import com.items.Request;
+
 public interface MakeDecision {
 
-	public void approveRequest();
-	public void rejectRequest();
-	
+	public void approveRequest(Request request);
+	public void rejectRequest(Request request);
 }

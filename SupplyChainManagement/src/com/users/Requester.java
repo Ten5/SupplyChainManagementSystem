@@ -1,5 +1,8 @@
 package com.users;
 
+import com.items.Request;
+import com.model.Stock;
+
 public class Requester extends User {
 
 	public Requester(String name, String password, String email) {
@@ -10,5 +13,10 @@ public class Requester extends User {
 	public void login() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public Request createRequest(Stock[] productList) {
+		Request request = new Request(productList);
+		return request;
 	}
 }

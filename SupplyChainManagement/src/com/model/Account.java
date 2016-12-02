@@ -3,26 +3,22 @@ package com.model;
 public class Account {
 
 	private int id;
-	private int balance;
+	private double balance;
 	
-	public Account() {
-		id = 0;
-		balance = 0;
-	}
-	
-	public void setID(int id) {
+	public Account(int id) {
 		this.id = id;
+		balance = 0;
 	}
 	
 	public int getID() {
 		return this.id;
 	}
 	
-	public void setBalance(int id) {
-		this.id = id;
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 	
-	public int getBalance(int id) {
+	public double getBalance() {
 		return this.balance;
 	}
 }

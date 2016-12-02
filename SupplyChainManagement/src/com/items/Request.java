@@ -1,27 +1,27 @@
 package com.items;
-import com.model.Product;
+import com.model.Stock;
 
 public class Request {
 
 	private int id;
 	private String requesterName;
-	private Product[] productList;
+	private Stock[] productList;
 	private int totalQuantity;
 	private double totalPrice;
 	private int status;
 	
-	public Request(Product[] productList) {
+	public Request(Stock[] productList) {
 		id = 0;
 		requesterName = "";
 		this.productList = productList;
 		
 		totalQuantity = 0;
 		for(int i = 0; i < productList.length; i++)
-			totalQuantity += productList[i].getStock();
+			totalQuantity += productList[i].getQuantity();
 		
 		totalPrice = 0.0;
 		for(int i = 0; i < productList.length; i++)
-			totalPrice += productList[i].getPrice();
+			totalPrice += productList[i].getProduct().getPrice();
 		
 		status = 0;
 	}
@@ -34,11 +34,11 @@ public class Request {
 		return this.id;
 	}
 	
-	public int getRequestedStatus() {
+	public int getRequestStatus() {
 		return this.status;
 	}
 	
-	public void setRequestedStatus(int status){
+	public void setRequestStatus(int status){
 		this.status = status;
 	}
 	
@@ -58,7 +58,7 @@ public class Request {
 		return this.totalQuantity;
 	}
 	
-	public Product[] getProductList() {
+	public Stock[] getProductList() {
 		return this.productList;
 	}
 }

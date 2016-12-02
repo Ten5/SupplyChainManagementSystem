@@ -1,4 +1,5 @@
 package com.users;
+
 import com.model.Stock;
 
 public class Supplier extends User {
@@ -12,6 +13,18 @@ public class Supplier extends User {
 	
 	public Stock[] getListOfProducts() {
 		return listOfProducts;
+	}
+	
+	public void setStock(Stock product, int stock) {
+		boolean flag = false;
+		for(Stock s : listOfProducts) {
+			if(s.getProduct().getType().compareTo(product.getProduct().getType()) == 0) {
+				s.addStock(stock);
+				flag = true;
+			}
+		}
+		if(!flag)
+			System.out.println("Product:" + product.getProduct().getType() + " could not be found!");
 	}
 
 	@Override

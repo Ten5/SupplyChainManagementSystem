@@ -7,10 +7,10 @@ public class Product {
 	private double price;
 	private Stock stock;
 	
-	public Product() {
-		id = 0;
-		type = "";
-		price = 0.0;
+	public Product(int id, String type, double price) {
+		this.id = id;
+		this.type = type;
+		this.price = price;
 		stock = new Stock(this);
 	}
 	

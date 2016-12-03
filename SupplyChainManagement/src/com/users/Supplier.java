@@ -15,11 +15,11 @@ public class Supplier extends User {
 		return listOfProducts;
 	}
 	
-	public void setStock(Stock product, int stock) {
+	public void listStock(Stock product, int stock) {
 		boolean flag = false;
 		for(Stock s : listOfProducts) {
 			if(s.getProduct().getType().compareTo(product.getProduct().getType()) == 0) {
-				s.addStock(stock);
+				s.setStock(stock);
 				flag = true;
 			}
 		}

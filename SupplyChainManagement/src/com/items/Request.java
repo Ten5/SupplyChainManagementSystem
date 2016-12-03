@@ -9,10 +9,11 @@ public class Request {
 	private int totalQuantity;
 	private double totalPrice;
 	private int status;
+	private int listSize;
 	
-	public Request(Stock[] productList) {
-		id = 0;
-		requesterName = "";
+	public Request(Stock[] productList, String name) {
+		id = (int)(Math.random()*10);
+		requesterName = name;
 		this.productList = productList;
 		
 		totalQuantity = 0;
@@ -21,8 +22,9 @@ public class Request {
 		
 		totalPrice = 0.0;
 		for(int i = 0; i < productList.length; i++)
-			totalPrice += productList[i].getProduct().getPrice();
+			totalPrice += (productList[i].getProduct().getPrice() * productList[i].getQuantity());
 		
+		listSize = productList.length;
 		status = 0;
 	}
 	
@@ -60,5 +62,17 @@ public class Request {
 	
 	public Stock[] getProductList() {
 		return this.productList;
+	}
+	
+	public int getSize() {
+		return this.listSize;
+	}
+	
+	public String showProducts() {
+		String list = "";
+		for(Stock s : productList) {
+			list += s.getProduct().getType() + "\n";
+		}
+		return list;
 	}
 }

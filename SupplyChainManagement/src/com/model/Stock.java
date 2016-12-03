@@ -14,7 +14,7 @@ public class Stock {
 		return this.product;
 	}
 	
-	public void addStock(int quantity) {
+	public void setStock(int quantity) {
 		this.quantity = quantity;
 	}
 	

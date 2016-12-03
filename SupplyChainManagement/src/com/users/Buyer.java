@@ -31,12 +31,12 @@ public class Buyer extends User implements MakeDecision {
 	@Override
 	public void approveRequest(Request request) {
 		request.setRequestStatus(1);
-		System.out.println("Request " + request.getID() + " from " + request.getRequesterName() + " approved by Buyer: " + this.getID());
+		System.out.println("Request " + request.getID() + " from " + request.getRequesterName() + " approved by Buyer: " + this.getName() + "\n");
 	}
 
 	@Override
 	public void rejectRequest(Request request) {
 		request.setRequestStatus(0);
-		System.out.println("Request " + request.getID() + " from " + request.getRequesterName() + " rejected by Buyer: " + this.getID());
+		System.out.println("Request " + request.getID() + " from " + request.getRequesterName() + " rejected by Buyer: " + this.getName() + "\n");
 	}
 }

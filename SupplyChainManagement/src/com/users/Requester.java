@@ -16,7 +16,13 @@ public class Requester extends User {
 	}
 	
 	public Request createRequest(Stock[] productList) {
-		Request request = new Request(productList);
+		Request request = new Request(productList, this.getName());
 		return request;
 	}
+	
+	public void addStock(Stock stock, int quantity) {
+		stock.setStock(quantity);
+	}
+	
+	
 }

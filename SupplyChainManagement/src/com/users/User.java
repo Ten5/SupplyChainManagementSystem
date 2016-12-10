@@ -42,5 +42,5 @@ public abstract class User {
 		return this.id;
 	}
 	
-	abstract public void login();
+	abstract public void login(String username, String password);
 }

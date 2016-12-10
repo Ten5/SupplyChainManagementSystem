@@ -14,9 +14,11 @@ public class FinancialApprover extends User implements MakeDecision {
 	}
 
 	@Override
-	public void login() {
-		// TODO Auto-generated method stub
-		
+	public void login(String username, String password) {
+		if(username.compareTo(getEmail()) == 0 && password.compareTo(getPassword()) == 0)
+			System.out.println(username + " successfully logged in.");
+		else
+			System.out.println(username + " failed to logged in.");
 	}
 	
 	//@requires (accounts[] != null)

@@ -12,18 +12,6 @@ import com.users.Supplier;
 
 public class Driver {
 
-	public static void print(Request customerRequest)
-	{
-		System.out.println("Requester: "+ customerRequest.getRequesterName() +"\n---Current Request Status--- " + 
-				"\nRequest ID: " +customerRequest.getID() + 
-				"\nRequester: " + customerRequest.getRequesterName() +
-				"\nItems: " + customerRequest.showProducts() +
-				"\nSize of List: " + customerRequest.getSize() +
-				"\nTotal Price: " + customerRequest.getTotalPrice() +
-				"\nTotal Quantity: " + customerRequest.getTotalQuantity() +
-				"\nStatus: " + customerRequest.getRequestStatus() + "\n"); 
-	}
-	
 	public static void main(String[] args) {
 		
 		Product chair = new Product(11, "chair", 5.5);
@@ -45,9 +33,16 @@ public class Driver {
 		
 		Requester john = new Requester("John", "john123", "john@xxx.com");
 		Requester shad = new Requester("Shad", "shad123", "shad@xyz.com");
-		
 		Buyer stan = new Buyer("Stan", "stan11", "stan@xxx.com");
 		FinancialApprover ravi = new FinancialApprover("Ravi", "ravi12", "ravi@xyz.com");
+		
+		john.login("john@xxx.com", "john123");
+		shad.login("shad@xyz.com", "shad12");
+		shad.login("shad@xyz.com", "shad123");
+		stan.login("stan@xxx.com", "stan11");
+		ravi.login("ravi@xyz.com", "ravi12");
+		
+		System.out.println();
 		
 		Stock woodStocks[] = {chairStock, tableStock, wardrobeStock};
 		Supplier newWodworks = new Supplier("New Woodworks", "woodworks", "admin@woodworks.com", woodStocks);
@@ -88,5 +83,16 @@ public class Driver {
 		
 		print(johnRequest);
 		print(shadRequest);
+	}
+	
+	public static void print(Request customerRequest) {
+		System.out.println("Requester: "+ customerRequest.getRequesterName() +"\n---Current Request Status--- " + 
+				"\nRequest ID: " +customerRequest.getID() + 
+				"\nRequester: " + customerRequest.getRequesterName() +
+				"\nItems: " + customerRequest.showProducts() +
+				"\nSize of List: " + customerRequest.getSize() +
+				"\nTotal Price: " + customerRequest.getTotalPrice() +
+				"\nTotal Quantity: " + customerRequest.getTotalQuantity() +
+				"\nStatus: " + customerRequest.getRequestStatus() + "\n"); 
 	}
 }

@@ -6,8 +6,8 @@ public class PurchaseOrder {
 	private int status;
 	private Request requestedItems;
 	
-	public PurchaseOrder(int id, int status, Request requestedItems) {
-		this.id = 0;
+	public PurchaseOrder(Request requestedItems) {
+		this.id = (int)(Math.random()*100);
 		this.status = 0;
 		this.requestedItems = requestedItems;
 	}

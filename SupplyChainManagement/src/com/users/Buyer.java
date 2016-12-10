@@ -1,7 +1,6 @@
 package com.users;
 import com.interfaces.MakeDecision;
 import com.items.Request;
-import com.model.Account;
 import com.model.Stock;
 
 public class Buyer extends User implements MakeDecision {
@@ -16,13 +15,13 @@ public class Buyer extends User implements MakeDecision {
 		
 	}
 	
-	public void checkRequest(Request request, Account account) {
-		double price = 0;
+	public void checkRequest(Request request) {
+		double qty = 0;
 		for(Stock s : request.getProductList()) {
-			price += s.getQuantity() * s.getProduct().getPrice();
+			qty += s.getQuantity();
 		}
 		
-		if(price <= account.getBalance())
+		if(qty <= 10)
 			approveRequest(request);
 		else
 			rejectRequest(request);
@@ -31,12 +30,12 @@ public class Buyer extends User implements MakeDecision {
 	@Override
 	public void approveRequest(Request request) {
 		request.setRequestStatus(1);
-		System.out.println("Request " + request.getID() + " from " + request.getRequesterName() + " approved by Buyer: " + this.getName() + "\n");
+		System.out.println("Request " + request.getID() + " from " + request.getRequesterName() + " approved by Buyer: " + this.getName());
 	}
 
 	@Override
 	public void rejectRequest(Request request) {
 		request.setRequestStatus(0);
-		System.out.println("Request " + request.getID() + " from " + request.getRequesterName() + " rejected by Buyer: " + this.getName() + "\n");
+		System.out.println("Request " + request.getID() + " from " + request.getRequesterName() + " rejected by Buyer: " + this.getName() + " due to quantity greater than 10");
 	}
 }

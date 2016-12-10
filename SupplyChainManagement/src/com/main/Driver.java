@@ -1,15 +1,29 @@
 package com.main;
 
+import com.items.PurchaseOrder;
 import com.items.Request;
 import com.model.Account;
 import com.model.Product;
 import com.model.Stock;
 import com.users.Buyer;
+import com.users.FinancialApprover;
 import com.users.Requester;
 import com.users.Supplier;
 
 public class Driver {
 
+	public static void print(Request customerRequest)
+	{
+		System.out.println("Requester: "+ customerRequest.getRequesterName() +"\n---Current Request Status--- " + 
+				"\nRequest ID: " +customerRequest.getID() + 
+				"\nRequester: " + customerRequest.getRequesterName() +
+				"\nItems: " + customerRequest.showProducts() +
+				"\nSize of List: " + customerRequest.getSize() +
+				"\nTotal Price: " + customerRequest.getTotalPrice() +
+				"\nTotal Quantity: " + customerRequest.getTotalQuantity() +
+				"\nStatus: " + customerRequest.getRequestStatus() + "\n"); 
+	}
+	
 	public static void main(String[] args) {
 		
 		Product chair = new Product(11, "chair", 5.5);
@@ -20,46 +34,59 @@ public class Driver {
 		
 		Product wadrobe = new Product(15, "wardrobe", 15);
 		Stock wardrobeStock = new Stock(wadrobe);
+			
+		Account IMABank = new Account(4520);
+		IMABank.setBalance(50);
 		
-		Account IMABank = new Account(452);
-		IMABank.setBalance(150);
+		Account MTBank = new Account(4500);
+		MTBank.setBalance(40);
+		
+		Account[] accounts = {IMABank, MTBank};
 		
 		Requester john = new Requester("John", "john123", "john@xxx.com");
+		Requester shad = new Requester("Shad", "shad123", "shad@xyz.com");
+		
 		Buyer stan = new Buyer("Stan", "stan11", "stan@xxx.com");
+		FinancialApprover ravi = new FinancialApprover("Ravi", "ravi12", "ravi@xyz.com");
 		
 		Stock woodStocks[] = {chairStock, tableStock, wardrobeStock};
 		Supplier newWodworks = new Supplier("New Woodworks", "woodworks", "admin@woodworks.com", woodStocks);
-		newWodworks.listStock(tableStock, 10);
-		newWodworks.listStock(chairStock, 35);
+		newWodworks.listStock(tableStock, 6);
+		newWodworks.listStock(chairStock, 13);
 		newWodworks.listStock(wardrobeStock, 5);
 		
-		Stock chairsRequired = new Stock(chair);
-		john.addStock(chairsRequired, 4);
+		Stock chairsRequiredJohn = new Stock(chair);
+		Stock chairsRequiredShad = new Stock(chair);
 		
-		Stock tablesRequired = new Stock(table);
-		john.addStock(tablesRequired, 1);
+		john.addStock(chairsRequiredJohn, 6);
+		shad.addStock(chairsRequiredShad, 4);
 		
-		Stock customerProductList[] = {chairsRequired, tablesRequired};				
-		Request customerRequest = john.createRequest(customerProductList);
+		Stock tablesRequiredJohn = new Stock(table);
+		Stock tablesRequiredShad = new Stock(table);
 		
-		System.out.println("Current Request Status: " + 
-				"\nRequest ID: " +customerRequest.getID() + 
-				"\nRequester: " + customerRequest.getRequesterName() +
-				"\nItems: \n" + customerRequest.showProducts() +
-				"\nSize of List: " + customerRequest.getSize() +
-				"\nTotal Price: " + customerRequest.getTotalPrice() +
-				"\nTotal Quantity: " + customerRequest.getTotalQuantity() +
-				"\nStatus: " + customerRequest.getRequestStatus() + "\n");
+		john.addStock(tablesRequiredJohn, 1);
+		shad.addStock(tablesRequiredShad, 3);
 		
-		stan.checkRequest(customerRequest, IMABank);
+		Stock johnProductList[] = {chairsRequiredJohn, tablesRequiredJohn};				
+		Request johnRequest = john.createRequest(johnProductList);
 		
-		System.out.println("Current Request Status: " + 
-				"\nRequest ID: " +customerRequest.getID() + 
-				"\nRequester: " + customerRequest.getRequesterName() +
-				"\nItems: \n" + customerRequest.showProducts() +
-				"\nSize of List: " + customerRequest.getSize() +
-				"\nTotal Price: " + customerRequest.getTotalPrice() +
-				"\nTotal Quantity: " + customerRequest.getTotalQuantity() +
-				"\nStatus: " + customerRequest.getRequestStatus() + "\n");
+		Stock shadProductList[] = {chairsRequiredShad, tablesRequiredShad};				
+		Request shadRequest = shad.createRequest(shadProductList);
+		
+		print(johnRequest);
+		print(shadRequest);
+		
+		stan.checkRequest(johnRequest);
+		PurchaseOrder PO1 = ravi.checkRequest(johnRequest, accounts);
+		if(PO1 != null)
+		newWodworks.checkPO(PO1);
+		
+		stan.checkRequest(shadRequest);
+		PurchaseOrder PO2 = ravi.checkRequest(shadRequest, accounts);
+		if(PO2 != null)
+		newWodworks.checkPO(PO2);
+		
+		print(johnRequest);
+		print(shadRequest);
 	}
 }

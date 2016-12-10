@@ -71,7 +71,7 @@ public class Request {
 	public String showProducts() {
 		String list = "";
 		for(Stock s : productList) {
-			list += s.getProduct().getType() + "\n";
+			list += s.getProduct().getType() + " | ";
 		}
 		return list;
 	}

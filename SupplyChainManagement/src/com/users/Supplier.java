@@ -1,5 +1,6 @@
 package com.users;
 
+import com.items.PurchaseOrder;
 import com.model.Stock;
 
 public class Supplier extends User {
@@ -33,11 +34,50 @@ public class Supplier extends User {
 		
 	}
 	
-	public boolean checkPO() {
-		return false;
+	public void checkPO(PurchaseOrder PO) {
+		int flag = 0;
+		if(PO.getStatus() == 0)
+		{
+			System.out.println("PO has been received from Financial Approver and is ready to ship");
+			for(Stock userStock: PO.getRequestItems().getProductList())
+			{
+				for(Stock supplierStock: getListOfProducts())
+				{
+					if(userStock.getProduct().getType().compareTo(supplierStock.getProduct().getType()) == 0)
+					{
+						if(userStock.getQuantity() > supplierStock.getQuantity())
+							flag = 1;
+					}
+				}
+			}
+			if(flag == 0)
+			{
+				approvePO(PO);
+			}
+			else
+				rejectPO(PO);
+		}
+		return;
 	}
 	
-	public void approvePO() {
-		
+	public void approvePO(PurchaseOrder PO) {
+		PO.setStatus(1);
+		for(Stock userStock: PO.getRequestItems().getProductList())
+		{
+			for(Stock supplierStock: getListOfProducts())
+			{
+				if(userStock.getProduct().getType().compareTo(supplierStock.getProduct().getType()) == 0)
+				{
+					supplierStock.setStock(supplierStock.getQuantity() - userStock.getQuantity());
+				}
+			}
+		}
+		System.out.println("PO has been successfully shipped by the supplier "+this.getName()+"\n");
+	}
+	
+	public void rejectPO(PurchaseOrder PO)
+	{
+		PO.setStatus(2);
+		System.out.println("PO has been rejected by supplier "+this.getName()+" due to insufficient quqntity \n");
 	}
 }

@@ -5,6 +5,8 @@ import com.items.Request;
 import com.model.Account;
 import com.model.Stock;
 
+//@invariant("id != null")
+
 public class FinancialApprover extends User implements MakeDecision {
 
 	public FinancialApprover(String name, String password, String email) {
@@ -16,6 +18,9 @@ public class FinancialApprover extends User implements MakeDecision {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	//@requires (accounts[] != null)
+	//@ensures (account.balance > price) 
 	
 	private Account selectAccount(Account[] accounts, double price)
 	{
@@ -49,20 +54,26 @@ public class FinancialApprover extends User implements MakeDecision {
 			rejectRequest(request);
 		return PO;
 	}
-
+	//@requires (request.status = 1)
+	//@ensures (PO != null)
+	
 	private PurchaseOrder generatePO(Request request)
 	{
 		PurchaseOrder PO = new PurchaseOrder(request);
 		return PO;
 	}
 	@Override
+	//@requires (request.getRequestedStatus() = 1)
+	//@ensures (request.getRequestedStatus() = 2)
 	
 	public void approveRequest(Request request) {
 		request.setRequestStatus(2);
 		PurchaseOrder PO = generatePO(request);
 		System.out.println("Request " + request.getID() + " from " + request.getRequesterName() + " approved by Approver: " + this.getName() + " and PO no "+PO.getID()+" is generated");
 	}
-
+	//@requires (request.getRequestedStatus() = 1)
+	//@ensures (request.getRequestedStatus() = 0)
+	
 	@Override
 	public void rejectRequest(Request request) {
 		request.setRequestStatus(0);

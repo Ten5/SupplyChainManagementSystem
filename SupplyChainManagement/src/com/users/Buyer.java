@@ -3,6 +3,7 @@ import com.interfaces.MakeDecision;
 import com.items.Request;
 import com.model.Stock;
 
+//@invariant("id != null")
 public class Buyer extends User implements MakeDecision {
 
 	public Buyer(String name, String password, String email) {
@@ -26,13 +27,16 @@ public class Buyer extends User implements MakeDecision {
 		else
 			rejectRequest(request);
 	}
-	
+	//@requires (request.getRequestedStatus() = 0)
+	//@ensures (request.getRequestedStatus() = 1)
 	@Override
 	public void approveRequest(Request request) {
 		request.setRequestStatus(1);
 		System.out.println("Request " + request.getID() + " from " + request.getRequesterName() + " approved by Buyer: " + this.getName());
 	}
-
+	
+	//@requires (request.getRequestedStatus() = 0)
+	//@ensures (request.getRequestedStatus() = 0)
 	@Override
 	public void rejectRequest(Request request) {
 		request.setRequestStatus(0);

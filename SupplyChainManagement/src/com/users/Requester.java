@@ -3,6 +3,8 @@ package com.users;
 import com.items.Request;
 import com.model.Stock;
 
+//@invariant("id != null")
+
 public class Requester extends User {
 
 	public Requester(String name, String password, String email) {

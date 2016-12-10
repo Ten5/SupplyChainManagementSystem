@@ -1,5 +1,7 @@
 package com.items;
 
+//@invariant("id != null")
+
 public class PurchaseOrder {
 
 	private int id;

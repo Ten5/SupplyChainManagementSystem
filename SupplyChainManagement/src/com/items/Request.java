@@ -1,6 +1,8 @@
 package com.items;
 import com.model.Stock;
 
+//@invariant("id != null")
+
 public class Request {
 
 	private int id;
@@ -31,6 +33,7 @@ public class Request {
 	public void setID(int id) {
 		this.id = id;
 	}
+	
 	
 	public int getID() {
 		return this.id;

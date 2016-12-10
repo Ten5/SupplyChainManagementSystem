@@ -3,6 +3,8 @@ package com.users;
 import com.items.PurchaseOrder;
 import com.model.Stock;
 
+//@invariant("id != null")
+
 public class Supplier extends User {
 
 	private Stock listOfProducts[];
@@ -60,6 +62,9 @@ public class Supplier extends User {
 		return;
 	}
 	
+	//@requires (userStock.getQuantity() < supplierStock.getQuantity())
+	//@ensures (supplier.quantity = supplierStock.getQuantity() - userStock.getQuantity() 
+	
 	public void approvePO(PurchaseOrder PO) {
 		PO.setStatus(1);
 		for(Stock userStock: PO.getRequestItems().getProductList())
@@ -74,7 +79,8 @@ public class Supplier extends User {
 		}
 		System.out.println("PO has been successfully shipped by the supplier "+this.getName()+"\n");
 	}
-	
+	//@requires (userStock.getQuantity() > supplierStock.getQuantity())
+	//@ensures  (PO status = 2)
 	public void rejectPO(PurchaseOrder PO)
 	{
 		PO.setStatus(2);

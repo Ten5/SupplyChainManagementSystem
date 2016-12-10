@@ -1,5 +1,7 @@
 package com.model;
 
+//@invariant("id.balance != null")
+
 public class Account {
 
 	private int id;

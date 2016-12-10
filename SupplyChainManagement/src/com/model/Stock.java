@@ -1,5 +1,8 @@
 package com.model;
 
+//@invariant("product != null")
+//@invariant("quantity != null")
+
 public class Stock {
 
 	private Product product;

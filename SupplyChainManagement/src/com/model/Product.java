@@ -1,5 +1,8 @@
 package com.model;
 
+//@invariant("id != null")
+//@invariant("price != null")
+
 public class Product {
 
 	private int id;
